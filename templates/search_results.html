@@ -3,12 +3,12 @@
 {% block body %}
     <div class="row mt-5">
         <div class="col">
-            <div class="row mt-2">
+            <div class="row mt-2 px-2">
                 <div class="col">
-                    <span class="text-info lead">{{ context.query }}</span>
+                    <h4>Query</h4>&nbsp;:&nbsp;<span class="text-secondary lead">{{ context.query }}</span>
                 </div>
             </div>
-            <div class="accordion" id="accordionExample">
+            <div class="accordion mt-5" id="accordionExample">
                 {% for res in context.results %}
                 <div class="accordion-item">
                   <h2 class="accordion-header" id="headingOne">
