@@ -36,11 +36,42 @@ def searchResult():
     response = requests.request("POST", url, headers=headers, data=payload)
     
     data = json.loads(response.text)
-
-    context = {
-        "query": query,
-        "results":data["results"][0]["results"]
-    }
+    try:
+        if len(data["results"][0]["results"]) and  data["results"][0]["results"][0]["score"] > .2:
+            context = {
+                "query": query,
+                "results":data["results"][0]["results"]
+            }
+        else:
+            context = {
+                "query": query,
+                "results":{"results":[
+                {
+                "results":[
+                    {
+                        "text": "Sorry, I don't have answer for this query. Kindly contact your HR or call EPFO Helpline for more information 1800118005.", 
+                        "score":1.0
+                    }
+                ]
+                }
+                ]
+                }
+            }
+    except:
+            context = {
+                 "query": query,
+                    "results":{"results":[
+                    {
+                        "results":[
+                            {
+                                "text": "Sorry, I don't have answer for this query. Kindly contact your HR or call EPFO Helpline for more information 1800118005.", 
+                                "score":1.0
+                            }
+                        ]
+                    }
+                    ]
+                }
+            }
 
 
     return render_template("search_results.html", context=context)
