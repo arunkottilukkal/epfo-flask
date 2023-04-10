@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <div class="row mt-5">
+        <div class="col">
+            <div class="row mt-2">
+                <div class="col">
+                    <span class="text-info lead">{{ context.query }}</span>
+                </div>
+            </div>
+            <div class="accordion" id="accordionExample">
+                {% for res in context.results %}
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      Search Score {{ res.score }}
+                    </button>
+                  </h2>
+                  <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                      {{ res.text }}
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+        </div>
+    </div>
+{% endblock %}
